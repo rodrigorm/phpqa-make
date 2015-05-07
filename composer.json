@@ -1,0 +1,33 @@
+{
+    "name": "rodrigorm/phpqa-make",
+    "description": "Makefile for PHP QA Tools",
+    "type": "library",
+    "keywords": [
+        "phpqa",
+        "tool",
+        "make"
+    ],
+    "homepage": "https://github.com/rodrigorm/phpqa-make",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Rodrigo Moyle",
+            "email": "rodrigorm@gmail.com",
+            "homepage": "https://github.com/rodrigorm",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "rodrigorm@gmail.com",
+        "issues": "https://github.com/rodrigorm/audit/issues"
+    },
+    "require-dev": {
+        "rhumsaa/jenkins-php": "^3.0"
+    },
+    "suggest": {
+        "rhumsaa/jenkins-php": "^3.0"
+    },
+    "bin": [
+        "bin/phpqa-depend"
+    ]
+}

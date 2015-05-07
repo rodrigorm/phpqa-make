@@ -1,0 +1,6 @@
+<ruleset name="PHPQA">
+    <description>Coding Standards</description>
+
+    <rule ref="PSR2" />
+    <rule ref="Generic.PHP.DisallowShortOpenTag" />
+</ruleset>

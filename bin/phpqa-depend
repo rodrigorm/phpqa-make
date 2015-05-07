@@ -1,0 +1,52 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../../vendor/autoload.php';
+
+use PHPMD\PHPMD;
+use PHPMD\RuleSetFactory;
+use PDepend\Input\CompositeFilter;
+use PDepend\Input\ExcludePathFilter;
+use PDepend\Input\ExtensionFilter;
+
+$ruleSetFactory = new RuleSetFactory();
+$inputPath = 'config,controllers,core,errors,helpers,hooks,language,libraries,models,views';
+
+$phpmd = new PHPMD();
+$phpmd->setIgnorePattern($ruleSetFactory->getIgnorePattern('build/phpmd.xml'));
+
+$fileFilter = new CompositeFilter();
+
+if (count($phpmd->getIgnorePattern()) > 0) {
+    $fileFilter->append(
+        new ExcludePathFilter($phpmd->getIgnorePattern())
+    );
+}
+
+if (count($phpmd->getFileExtensions()) > 0) {
+    $fileFilter->append(
+        new ExtensionFilter($phpmd->getFileExtensions())
+    );
+}
+
+$fileIterator = new \AppendIterator();
+
+foreach (explode(',', $inputPath) as $directory) {
+    $fileIterator->append(
+        new \PDepend\Input\Iterator(
+            new \RecursiveIteratorIterator(
+                new \RecursiveDirectoryIterator($directory . '/')
+            ),
+            $fileFilter,
+            $directory
+        )
+    );
+}
+
+foreach ($fileIterator as $file) {
+    if (!$file->isFile()) {
+        continue;
+    }
+
+    echo '$(logsdir)/pmd.xml depend.mk : build/phpmd/', $file->getPathname(), '.xml', "\n";
+}
