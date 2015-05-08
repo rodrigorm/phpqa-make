@@ -18,10 +18,10 @@ phpqa-phpmd : $(LOGSDIR)/pmd.xml
 $(LOGSDIR)/pmd.xml :
 	@echo '<?xml version="1.0" encoding="UTF-8" ?>' > "$@"
 	@echo '<pmd version="@project.version@" timestamp="$(shell date --rfc-3339=ns)">' >> "$@"
-	@(find "$(BUILDDIR)/phpmd" -name "*.php.xml" -print0 | xargs -0 grep -vh '</\?pmd\|<?xml') >> "$@"
+	@(find "$(LOGSDIR)/phpmd" -name "*.php.xml" -print0 | xargs -0 grep -vh '</\?pmd\|<?xml') >> "$@"
 	@echo '</pmd>' >> "$@"
 
-$(BUILDDIR)/phpmd/%.php.xml : %.php phpmd.xml | $(PHPMD)
+$(LOGSDIR)/phpmd/%.php.xml : %.php phpmd.xml | $(PHPMD)
 	@mkdir -p "$(dir $@)"
 	@$(PHPMD) "$<" text "phpmd.xml" --reportfile-xml "$@"; true
 
@@ -31,6 +31,6 @@ phpmd.mk :
 	@$(PHPQADEPEND) $(srcdirlist) "phpmd.xml" > "$@"
 
 phpqa-phpmd-clean :
-	@rm -rf "$(BUILDDIR)/phpmd"
+	@rm -rf "$(LOGSDIR)/phpmd"
 	@rm "$(LOGSDIR)/pmd.xml"
 	@rm phpmd.mk

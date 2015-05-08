@@ -7,8 +7,8 @@ phpqa-pre-commit : phpqa-phpcs
 phpqa-clean : phpqa-phpcs-clean
 
 # Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.
-phpqa-phpcs : $(patsubst %.php,$(BUILDDIR)/phpcs/%.php.log,$(SRC))
-$(BUILDDIR)/phpcs/%.php.log : %.php
+phpqa-phpcs : $(patsubst %.php,$(LOGSDIR)/phpcs/%.php.log,$(SRC))
+$(LOGSDIR)/phpcs/%.php.log : %.php
 	@mkdir -p "$(dir $@)"
 	@$(PHPCS) --standard="phpcs.xml" "$<" | tee $@
 
@@ -18,5 +18,5 @@ $(LOGSDIR)/checkstyle.xml : $(SRC) phpcs.xml | $(LOGSDIR) $(PHPCS)
 	@$(PHPCS) --report=checkstyle --report-file="$(LOGSDIR)/checkstyle.xml" --standard="phpcs.xml" $(SRCDIR); true
 
 phpqa-phpcs-clean :
-	@rm -rf "$(BUILDDIR)/phpcs"
+	@rm -rf "$(LOGSDIR)/phpcs"
 	@rm "$(LOGSDIR)/checkstyle.xml"

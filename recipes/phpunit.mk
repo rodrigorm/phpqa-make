@@ -16,5 +16,5 @@ $(LOGSDIR)/junit.xml : $(SRC) $(TESTS) phpunit.xml.dist | $(LOGSDIR) $(PHPUNIT)
 	@$(PHPUNIT) || rm "$@"
 
 phpqa-phpunit-clean :
-	@rm -rf "$(BUILDDIR)/coverage"
+	@rm -rf "$(LOGSDIR)/coverage"
 	@rm "$(LOGSDIR)/junit.xml"

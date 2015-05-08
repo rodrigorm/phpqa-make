@@ -2,9 +2,11 @@ BUILDDIR ?= build
 SRCDIR ?= src
 TESTSDIR ?= tests
 LOGSDIR ?= $(BUILDDIR)/logs
+EXCLUDES ?=
 
-SRC ?= $(shell find $(SRCDIR) -type f -name "*.php")
-TESTS ?= $(shell find $(TESTSDIR) -type f -name "*.php")
+excludes := $(addprefix ! -path ",$(addsuffix ",$(EXCLUDES)))
+SRC ?= $(shell find $(value SRCDIR) -type f -name "*.php" $(value excludes))
+TESTS ?= $(shell find $(value TESTSDIR) -type f -name "*.php" $(value excludes))
 
 BIN ?= vendor/bin
 

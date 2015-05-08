@@ -13,12 +13,12 @@ phpqa-clean :phpqa-pdepend-clean
 
 # Calculate software metrics using PHP_Depend
 phpqa-pdepend : $(LOGSDIR)/jdepend.xml
-$(LOGSDIR)/jdepend.xml : $(SRC) | $(BUILDDIR)/pdepend $(LOGSDIR) $(PDEPEND)
-	@$(PDEPEND) --jdepend-xml="$(LOGSDIR)/jdepend.xml" --jdepend-chart="$(BUILDDIR)/pdepend/dependencies.svg" --overview-pyramid="$(BUILDDIR)/pdepend/overview-pyramid.svg" $(srcdirlist)
+$(LOGSDIR)/jdepend.xml : $(SRC) | $(LOGSDIR)/pdepend $(LOGSDIR) $(PDEPEND)
+	@$(PDEPEND) --jdepend-xml="$(LOGSDIR)/jdepend.xml" --jdepend-chart="$(LOGSDIR)/pdepend/dependencies.svg" --overview-pyramid="$(LOGSDIR)/pdepend/overview-pyramid.svg" $(srcdirlist)
 
-$(BUILDDIR)/pdepend :
+$(LOGSDIR)/pdepend :
 	@mkdir -p "$@"
 
 phpqa-pdepend-clean :
-	@rm -rf "$(BUILDDIR)/pdepend"
+	@rm -rf "$(LOGSDIR)/pdepend"
 	@rm "$(LOGSDIR)/jdepend.xml"
