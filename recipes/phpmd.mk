@@ -1,6 +1,12 @@
 PHPMD ?= $(BIN)/phpmd
 PHPQADEPEND ?= $(BIN)/phpqa-depend
 
+EMPTY =
+SPACE = $(EMPTY) $(EMPTY)
+COMMA = ,
+
+srcdirlist = $(subst $(SPACE),$(COMMA),$(SRCDIR))
+
 .PHONY : phpqa-phpmd
 
 phpqa-build : phpqa-phpmd
@@ -22,7 +28,7 @@ $(BUILDDIR)/phpmd/%.php.xml : %.php $(BUILDDIR)/phpmd.xml | $(PHPMD)
 -include phpmd.mk
 
 phpmd.mk :
-	@$(PHPQADEPEND) > "$@"
+	@$(PHPQADEPEND) $(srcdirlist) "$(BUILDDIR)/phpmd.xml" > "$@"
 
 phpqa-phpmd-clean :
 	@rm -rf "$(BUILDDIR)/phpmd"

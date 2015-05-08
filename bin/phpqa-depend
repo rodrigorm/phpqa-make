@@ -1,7 +1,23 @@
 #!/usr/bin/env php
 <?php
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+$loaded = false;
+
+foreach (array(__DIR__ . '/../../../autoload.php', __DIR__ . '/../vendor/autoload.php') as $file) {
+    if (file_exists($file)) {
+        require $file;
+        $loaded = true;
+        break;
+    }
+}
+
+if (!$loaded) {
+    die(
+        'You need to set up the project dependencies using the following commands:' . PHP_EOL .
+        'wget http://getcomposer.org/composer.phar' . PHP_EOL .
+        'php composer.phar install' . PHP_EOL
+    );
+}
 
 use PHPMD\PHPMD;
 use PHPMD\RuleSetFactory;
@@ -10,10 +26,10 @@ use PDepend\Input\ExcludePathFilter;
 use PDepend\Input\ExtensionFilter;
 
 $ruleSetFactory = new RuleSetFactory();
-$inputPath = 'config,controllers,core,errors,helpers,hooks,language,libraries,models,views';
+$inputPath = $argv[1];
 
 $phpmd = new PHPMD();
-$phpmd->setIgnorePattern($ruleSetFactory->getIgnorePattern('build/phpmd.xml'));
+$phpmd->setIgnorePattern($ruleSetFactory->getIgnorePattern($argv[2]));
 
 $fileFilter = new CompositeFilter();
 
