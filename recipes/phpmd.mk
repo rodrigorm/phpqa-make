@@ -32,5 +32,5 @@ $(LOGSDIR)/phpmd.mk :
 
 phpqa-phpmd-clean :
 	@rm -rf "$(LOGSDIR)/phpmd"
-	@rm "$(LOGSDIR)/pmd.xml"
+	@rm -f "$(LOGSDIR)/pmd.xml"
 	@rm -f $(LOGSDIR)/phpmd.mk
