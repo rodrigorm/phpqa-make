@@ -1,4 +1,5 @@
 PHPCS ?= $(BIN)/phpcs
+PHPQAPHPCS ?= $(BIN)/phpqa-phpcs
 
 .PHONY : phpqa-phpcs phpqa-phpcs-ci
 
@@ -14,9 +15,22 @@ $(LOGSDIR)/phpcs/%.php.log : %.php
 
 # Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server
 phpqa-phpcs-ci : $(LOGSDIR)/checkstyle.xml
-$(LOGSDIR)/checkstyle.xml : $(SRC) phpcs.xml | $(LOGSDIR) $(PHPCS)
-	@$(PHPCS) --report=checkstyle --report-file="$(LOGSDIR)/checkstyle.xml" --standard="phpcs.xml" $(SRCDIR); true
+$(LOGSDIR)/checkstyle.xml :
+	@echo '<?xml version="1.0" encoding="UTF-8" ?>' > "$@"
+	@echo '<checkstyle version="2.3.2">' >> "$@"
+	@(find "$(LOGSDIR)/phpcs" -name "*.php.xml" -print0 | xargs -0 grep -vh '</\?checkstyle\|<?xml') >> "$@"
+	@echo '</checkstyle>' >> "$@"
+
+$(LOGSDIR)/phpcs/%.php.xml : %.php phpcs.xml | $(PHPCS)
+	@mkdir -p "$(dir $@)"
+	@$(PHPCS) --report=checkstyle --report-file="$@" --standard="phpcs.xml" $<; true
+
+-include $(LOGSDIR)/phpcs.mk
+
+$(LOGSDIR)/phpcs.mk :
+	@$(PHPQAPHPCS) "phpcs.xml" $(SRC) > "$@"
 
 phpqa-phpcs-clean :
 	@rm -rf "$(LOGSDIR)/phpcs"
 	@rm -f "$(LOGSDIR)/checkstyle.xml"
+	@rm -f "$(LOGSDIR)/phpcs.mk
