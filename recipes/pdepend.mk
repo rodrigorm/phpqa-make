@@ -21,4 +21,4 @@ $(LOGSDIR)/pdepend :
 
 phpqa-pdepend-clean :
 	@rm -rf "$(LOGSDIR)/pdepend"
-	@rm "$(LOGSDIR)/jdepend.xml"
+	@rm -f "$(LOGSDIR)/jdepend.xml"

@@ -33,4 +33,4 @@ phpmd.mk :
 phpqa-phpmd-clean :
 	@rm -rf "$(LOGSDIR)/phpmd"
 	@rm "$(LOGSDIR)/pmd.xml"
-	@rm phpmd.mk
+	@rm -f phpmd.mk

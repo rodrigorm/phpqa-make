@@ -19,4 +19,4 @@ $(LOGSDIR)/checkstyle.xml : $(SRC) phpcs.xml | $(LOGSDIR) $(PHPCS)
 
 phpqa-phpcs-clean :
 	@rm -rf "$(LOGSDIR)/phpcs"
-	@rm "$(LOGSDIR)/checkstyle.xml"
+	@rm -f "$(LOGSDIR)/checkstyle.xml"
