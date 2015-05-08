@@ -21,14 +21,14 @@ $(LOGSDIR)/pmd.xml :
 	@(find "$(BUILDDIR)/phpmd" -name "*.php.xml" -print0 | xargs -0 grep -vh '</\?pmd\|<?xml') >> "$@"
 	@echo '</pmd>' >> "$@"
 
-$(BUILDDIR)/phpmd/%.php.xml : %.php $(BUILDDIR)/phpmd.xml | $(PHPMD)
+$(BUILDDIR)/phpmd/%.php.xml : %.php phpmd.xml | $(PHPMD)
 	@mkdir -p "$(dir $@)"
-	@$(PHPMD) "$<" text "$(BUILDDIR)/phpmd.xml" --reportfile-xml "$@"; true
+	@$(PHPMD) "$<" text "phpmd.xml" --reportfile-xml "$@"; true
 
 -include phpmd.mk
 
 phpmd.mk :
-	@$(PHPQADEPEND) $(srcdirlist) "$(BUILDDIR)/phpmd.xml" > "$@"
+	@$(PHPQADEPEND) $(srcdirlist) "phpmd.xml" > "$@"
 
 phpqa-phpmd-clean :
 	@rm -rf "$(BUILDDIR)/phpmd"

@@ -64,5 +64,5 @@ foreach ($fileIterator as $file) {
         continue;
     }
 
-    echo '$(logsdir)/pmd.xml depend.mk : build/phpmd/', $file->getPathname(), '.xml', "\n";
+    echo '$(LOGSDIR)/pmd.xml depend.mk : $(BUILDDIR)/phpmd/', $file->getPathname(), '.xml', "\n";
 }
