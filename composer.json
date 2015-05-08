@@ -28,6 +28,7 @@
         "rhumsaa/jenkins-php": "^3.0"
     },
     "bin": [
-        "bin/phpqa-depend"
+        "bin/phpqa-phpcs",
+        "bin/phpqa-phpmd"
     ]
 }
