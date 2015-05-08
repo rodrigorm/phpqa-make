@@ -33,4 +33,4 @@ $(LOGSDIR)/phpcs.mk :
 phpqa-phpcs-clean :
 	@rm -rf "$(LOGSDIR)/phpcs"
 	@rm -f "$(LOGSDIR)/checkstyle.xml"
-	@rm -f "$(LOGSDIR)/phpcs.mk
+	@rm -f "$(LOGSDIR)/phpcs.mk"
