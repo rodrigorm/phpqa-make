@@ -1,5 +1,6 @@
 PHPMD ?= $(BIN)/phpmd
 PHPQAPHPMD ?= $(BIN)/phpqa-phpmd
+PHPMDFLAGS ?=
 
 EMPTY =
 SPACE = $(EMPTY) $(EMPTY)
@@ -23,7 +24,7 @@ $(LOGSDIR)/pmd.xml :
 
 $(LOGSDIR)/phpmd/%.php.xml : %.php phpmd.xml | $(PHPMD)
 	@mkdir -p "$(dir $@)"
-	@$(PHPMD) "$<" text "phpmd.xml" --reportfile-xml "$@"; true
+	@$(PHPMD) "$<" text "phpmd.xml" $(PHPMDFLAGS) --reportfile-xml "$@"; true
 
 -include $(LOGSDIR)/phpmd.mk
 

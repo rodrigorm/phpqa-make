@@ -1,4 +1,5 @@
 PDEPEND ?= $(BIN)/pdepend
+PDEPENDFLAGS ?=
 
 EMPTY =
 SPACE = $(EMPTY) $(EMPTY)
@@ -15,7 +16,7 @@ phpqa-clean :phpqa-pdepend-clean
 # Calculate software metrics using PHP_Depend
 phpqa-pdepend : $(LOGSDIR)/jdepend.xml
 $(LOGSDIR)/jdepend.xml : $(SRC) | $(LOGSDIR)/pdepend $(LOGSDIR) $(PDEPEND)
-	@$(PDEPEND) --jdepend-xml="$(LOGSDIR)/jdepend.xml" --jdepend-chart="$(LOGSDIR)/pdepend/dependencies.svg" --overview-pyramid="$(LOGSDIR)/pdepend/overview-pyramid.svg" --ignore="$(excludeslist)" $(srcdirlist)
+	@$(PDEPEND) --jdepend-xml="$(LOGSDIR)/jdepend.xml" --jdepend-chart="$(LOGSDIR)/pdepend/dependencies.svg" --overview-pyramid="$(LOGSDIR)/pdepend/overview-pyramid.svg" --ignore="$(excludeslist)" $(PDEPENDFLAGS) $(srcdirlist)
 
 $(LOGSDIR)/pdepend :
 	@mkdir -p "$@"
