@@ -15,7 +15,7 @@ $(LOGSDIR)/pmd.xml : $(SRC:%.php=$(LOGSDIR)/phpmd/%.php.xml)
 	@(find "$(LOGSDIR)/phpmd" -name "*.php.xml" -print0 | xargs -0 grep -vh '</\?pmd\|<?xml'; true) >> "$@"
 	@echo '</pmd>' >> "$@"
 
-$(LOGSDIR)/phpmd/%.php.xml : %.php phpmd.xml | $(PHPMD)
+$(LOGSDIR)/phpmd/%.php.xml : %.php phpmd.xml
 	@mkdir -p "$(dir $@)"
 	@$(PHPMD) "$<" text "phpmd.xml" $(PHPMDFLAGS) --reportfile-xml "$@"; true
 

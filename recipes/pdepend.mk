@@ -15,7 +15,7 @@ phpqa-clean :phpqa-pdepend-clean
 
 # Calculate software metrics using PHP_Depend
 phpqa-pdepend : $(LOGSDIR)/jdepend.xml
-$(LOGSDIR)/jdepend.xml : $(SRC) | $(LOGSDIR)/pdepend $(LOGSDIR) $(PDEPEND)
+$(LOGSDIR)/jdepend.xml : $(SRC) | $(LOGSDIR)/pdepend
 	@$(PDEPEND) --jdepend-xml="$(LOGSDIR)/jdepend.xml" --jdepend-chart="$(LOGSDIR)/pdepend/dependencies.svg" --overview-pyramid="$(LOGSDIR)/pdepend/overview-pyramid.svg" --ignore="$(excludeslist)" $(PDEPENDFLAGS) $(srclist)
 
 $(LOGSDIR)/pdepend :

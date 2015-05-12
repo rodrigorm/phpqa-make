@@ -8,7 +8,7 @@ phpqa-clean : phpqa-phpcpd-clean
 
 # Find duplicate code using PHPCPD
 phpqa-phpcpd : $(LOGSDIR)/pmd-cpd.xml
-$(LOGSDIR)/pmd-cpd.xml : $(SRC) | $(LOGSDIR) $(PHPCPD)
+$(LOGSDIR)/pmd-cpd.xml : $(SRC) | $(LOGSDIR)
 	@$(PHPCPD) --log-pmd "$(LOGSDIR)/pmd-cpd.xml" $(SRC); true
 
 phpqa-phpcpd-clean :

@@ -20,7 +20,7 @@ $(LOGSDIR)/checkstyle.xml : $(SRC:%.php=$(LOGSDIR)/phpcs/%.php.xml)
 	@(find "$(LOGSDIR)/phpcs" -name "*.php.xml" -print0 | xargs -0 grep -vh '</\?checkstyle\|<?xml') >> "$@"
 	@echo '</checkstyle>' >> "$@"
 
-$(LOGSDIR)/phpcs/%.php.xml : %.php phpcs.xml | $(PHPCS)
+$(LOGSDIR)/phpcs/%.php.xml : %.php phpcs.xml
 	@mkdir -p "$(dir $@)"
 	@$(PHPCS) --report=checkstyle --report-file="$@" --standard="phpcs.xml" $<; true
 
