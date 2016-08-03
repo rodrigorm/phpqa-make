@@ -25,5 +25,5 @@ $(LOGSDIR)/phpcs/%.php.xml : %.php phpcs.xml
 	@$(PHPCS) --report=checkstyle --report-file="$@" --standard="phpcs.xml" $<; true
 
 phpqa-phpcs-clean :
-	@rm -rf "$(LOGSDIR)/phpcs"
-	@rm -f "$(LOGSDIR)/checkstyle.xml"
+	-rm -rf "$(LOGSDIR)/phpcs"
+	-rm -f "$(LOGSDIR)/checkstyle.xml"

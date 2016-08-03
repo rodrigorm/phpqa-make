@@ -20,5 +20,5 @@ $(LOGSDIR)/phpmd/%.php.xml : %.php phpmd.xml
 	@$(PHPMD) "$<" text "phpmd.xml" $(PHPMDFLAGS) --reportfile-xml "$@"; true
 
 phpqa-phpmd-clean :
-	@rm -rf "$(LOGSDIR)/phpmd"
-	@rm -f "$(LOGSDIR)/pmd.xml"
+	-rm -rf "$(LOGSDIR)/phpmd"
+	-rm -f "$(LOGSDIR)/pmd.xml"

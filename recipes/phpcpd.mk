@@ -12,4 +12,4 @@ $(LOGSDIR)/pmd-cpd.xml : $(SRC) | $(LOGSDIR)
 	@$(PHPCPD) --log-pmd "$(LOGSDIR)/pmd-cpd.xml" $(SRC); true
 
 phpqa-phpcpd-clean :
-	@rm -f "$(LOGSDIR)/pmd-cpd.xml"
+	-rm -f "$(LOGSDIR)/pmd-cpd.xml"

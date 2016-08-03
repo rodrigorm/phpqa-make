@@ -11,4 +11,4 @@ $(LOGSDIR)/phploc.csv : $(SRC) | $(LOGSDIR)
 	@$(PHPLOC) --log-csv "$(LOGSDIR)/phploc.csv" $(SRC)
 
 phpqa-phploc-clean :
-	@rm -f "$(LOGSDIR)/phploc.csv"
+	-rm -f "$(LOGSDIR)/phploc.csv"

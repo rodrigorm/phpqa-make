@@ -10,4 +10,4 @@ $(LOGSDIR)/lint/%.php.log : %.php
 	@php -l "$<" | tee "$@"
 
 phpqa-lint-clean :
-	@rm -rf "$(LOGSDIR)/lint"
+	-rm -rf "$(LOGSDIR)/lint"
