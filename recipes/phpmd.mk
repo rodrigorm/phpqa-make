@@ -11,7 +11,7 @@ phpqa-clean : phpqa-phpmd-clean
 phpqa-phpmd : $(LOGSDIR)/pmd.xml
 $(LOGSDIR)/pmd.xml : $(SRC:%.php=$(LOGSDIR)/phpmd/%.php.xml)
 	@echo '<?xml version="1.0" encoding="UTF-8" ?>' > "$@"
-	@echo '<pmd version="@project.version@" timestamp="$(shell date --rfc-3339=ns)">' >> "$@"
+	@echo '<pmd version="@project.version@" timestamp="$(shell date +%Y-%m-%dT%T%z)">' >> "$@"
 	@(find "$(LOGSDIR)/phpmd" -name "*.php.xml" -print0 | xargs -0 grep -vh '</\?pmd\|<?xml'; true) >> "$@"
 	@echo '</pmd>' >> "$@"
 
